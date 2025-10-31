@@ -33,53 +33,91 @@ Le projet utilise les fichiers suivants :
 2. **Phase 1** : 40 % du coût total.
 3. **Phases 2, 3, 4** : 20 % du coût total pour chaque phase.
 
-## Solution Proposée
+# Rapport Détaillé
 
-### Approche Générale
-La solution repose sur la modélisation du problème sous forme de graphe pondéré, où :
-- Les **nœuds** représentent les bâtiments et les points de connexion.
-- Les **arêtes** représentent les lignes électriques possibles, avec un poids correspondant au coût total (matériel + main-d'œuvre).
+## 1. Description de la Métrique de Priorisation
 
-L'objectif est de construire un **arbre couvrant minimal** (Minimum Spanning Tree, MST) pour connecter tous les bâtiments au réseau électrique tout en respectant les contraintes de coûts, de temps et de priorités.
+Notre métrique principale de priorisation est le **ratio bénéficiaires/coût**, qui représente le nombre de maisons desservies par euro investi. Cette métrique est calculée comme suit :
 
-### Étapes de la Solution
-1. **Modélisation des Données** :
-   - Les données du fichier `reseau_en_arbre.csv` sont utilisées pour construire le graphe.
-   - Les coûts des infrastructures (aérien, semi-aérien, fourreau) et les durées de travail sont calculés pour chaque connexion.
+```
+Métrique de Priorisation = Nombre de Bénéficiaires / Coût Total de l'Infrastructure
+```
 
-2. **Priorisation des Connexions** :
-   - La métrique principale de priorisation utilisée est le ratio **bénéficiaires/coût** (nombre de maisons desservies par euro investi).
-   - Les infrastructures sont classées par ordre décroissant de ce ratio pour maximiser l'impact social par euro dépensé.
-   - Pour chaque phase, les infrastructures sont sélectionnées selon ce classement jusqu'à atteindre le budget alloué à la phase.
-   - En cas d'égalité du ratio, le nombre absolu de bénéficiaires est utilisé comme critère secondaire.
-   - Les connexions sont priorisées en fonction de leur **coût par prise raccordée**. Cette métrique est calculée comme suit :
-     \[
-     \text{Métrique de Priorisation} = \frac{\text{Coût Total de la Connexion}}{\text{Nombre de Prises Raccordées}}
-     \]
-   - Les connexions avec le coût par prise le plus faible sont traitées en premier.
+Cette approche présente plusieurs avantages :
 
-3. **Phases de Construction** :
-   - **Phase 0** : L'hôpital est priorisé pour garantir sa connexion dans les 20 heures disponibles, avec une marge de sécurité de 20 %.
-   - **Phase 1** : 40 % du budget total est alloué pour connecter un maximum de bâtiments après l'hôpital.
-   - **Phases 2, 3, 4** : Les 60 % restants sont répartis équitablement (20 % par phase) pour compléter le raccordement.
+- **Maximisation de l'impact social** : En priorisant les infrastructures avec le meilleur ratio bénéficiaires/coût, nous maximisons le nombre de foyers raccordés pour chaque euro investi.
+- **Équité et efficience** : Cette métrique permet d'équilibrer l'équité (desservir un maximum de personnes) et l'efficience économique (minimiser les coûts).
+- **Adaptabilité aux contraintes budgétaires** : La métrique s'adapte naturellement aux différentes phases du projet et à leurs contraintes budgétaires respectives.
 
-4. **Optimisation des Ressources** :
-   - La mutualisation des lignes électriques est prise en compte pour minimiser les coûts.
-   - Un maximum de 4 ouvriers est affecté par infrastructure, et les durées sont ajustées en conséquence.
+En cas d'égalité du ratio, nous utilisons le nombre absolu de bénéficiaires comme critère secondaire, favorisant ainsi les infrastructures desservant le plus grand nombre de foyers.
 
-5. **Validation des Contraintes** :
-   - Les coûts et durées sont vérifiés pour chaque phase afin de respecter les limites budgétaires et temporelles.
-   - Une marge de sécurité est appliquée pour les infrastructures critiques comme l'hôpital.
+## 2. Plan de Raccordement avec Ordre de Priorité
 
-### Résultats
-- Le plan de raccordement est optimisé pour minimiser les coûts tout en maximisant le nombre de prises raccordées.
-- Les bâtiments critiques (comme l'hôpital) sont raccordés en priorité.
-- Les phases de construction sont équilibrées pour respecter les contraintes budgétaires et temporelles.
+Notre plan de raccordement est structuré en 5 phases distinctes, chacune avec ses propres priorités :
 
-### Métrique de Priorisation
-La métrique de priorisation utilisée est essentielle pour garantir une optimisation efficace. Elle permet de :
-- Maximiser l'impact (nombre de prises raccordées) pour chaque euro dépensé.
-- Prioriser les connexions les plus simples et les moins coûteuses.
-- Garantir une progression rapide du raccordement tout en respectant les contraintes.
+### Phase 0 : Infrastructures Critiques (Hôpital)
+- **Nombre d'infrastructures** : 3
+- **Coût total** : 21 405,13 €
+- **Bénéficiaires** : 24
+- **Durée critique** : 9,35 heures (avec 4 ouvriers par infrastructure)
+- **Pourcentage du coût total** : 1,47%
 
-En résumé, cette approche garantit un raccordement rapide, efficace et optimisé pour tous les citoyens, tout en respectant les contraintes imposées par le projet.
+Cette phase prioritaire garantit que l'hôpital est raccordé bien avant l'épuisement de son autonomie de 20 heures (avec une marge de sécurité de 20%).
+
+### Phase 1 : Raccordement Massif Initial
+- **Nombre d'infrastructures** : 108
+- **Coût total** : 592 227,91 €
+- **Bénéficiaires** : 1 928
+- **Durée critique** : 38,17 heures
+- **Pourcentage du coût total** : 40,64%
+
+Cette phase représente le plus grand nombre de bénéficiaires (1 928 foyers), conformément à l'objectif de 40% du budget total.
+
+### Phase 2 : Premier Complément
+- **Nombre d'infrastructures** : 41
+- **Coût total** : 323 498,05 €
+- **Bénéficiaires** : 167
+- **Durée critique** : 37,66 heures
+- **Pourcentage du coût total** : 22,20%
+
+### Phase 3 : Deuxième Complément
+- **Nombre d'infrastructures** : 28
+- **Coût total** : 292 542,54 €
+- **Bénéficiaires** : 78
+- **Durée critique** : 32,23 heures
+- **Pourcentage du coût total** : 20,07%
+
+### Phase 4 : Finalisation
+- **Nombre d'infrastructures** : 17
+- **Coût total** : 227 589,93 €
+- **Bénéficiaires** : 25
+- **Durée critique** : 43,26 heures
+- **Pourcentage du coût total** : 15,62%
+
+## 3. Analyse des Coûts et Bénéfices
+
+### Analyse Globale
+- **Nombre total d'infrastructures réparées** : 197
+- **Coût total du projet** : 1 457 263,57 €
+- **Nombre total de bénéficiaires** : 2 222
+- **Coût moyen par bénéficiaire** : 655,83 €
+
+### Répartition des Coûts
+- **Coûts matériels** : 1 235 335,55 € (84,77% du total)
+- **Coûts de main-d'œuvre** : 221 928,02 € (15,23% du total)
+
+### Efficacité par Phase
+- **Phase 0** : 892 € par bénéficiaire (priorité à la sécurité)
+- **Phase 1** : 307 € par bénéficiaire (phase la plus efficiente)
+- **Phase 2** : 1 937 € par bénéficiaire
+- **Phase 3** : 3 750 € par bénéficiaire
+- **Phase 4** : 9 104 € par bénéficiaire (phase la moins efficiente)
+
+Cette analyse démontre l'efficacité de notre métrique de priorisation, avec un coût par bénéficiaire qui augmente progressivement à travers les phases. La Phase 1 présente le meilleur rapport coût-bénéfice, tandis que les phases ultérieures concernent des infrastructures moins efficientes mais nécessaires pour compléter le raccordement de l'ensemble de la communauté.
+
+### Bénéfices Sociaux et Économiques
+- **Rétablissement rapide pour la majorité** : 87,67% des bénéficiaires sont raccordés dès les phases 0 et 1.
+- **Équité territoriale** : Toutes les zones sont progressivement couvertes, même celles moins densément peuplées.
+- **Respect des contraintes temporelles** : Le raccordement de l'hôpital est assuré en 9,35 heures, bien en-deçà de la limite de 16 heures (20h avec marge de sécurité).
+
+En conclusion, notre plan de raccordement offre un équilibre optimal entre efficacité économique et impact social, en priorisant les infrastructures selon leur ratio bénéficiaires/coût tout en respectant les contraintes techniques et budgétaires du projet.
