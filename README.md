@@ -15,12 +15,12 @@ Une petite ville a été touchée par des intempéries, entraînant la destructi
 ```
 projet_optimisation/
 ├── README.md                         # Documentation du projet
-├── plan_raccordement.py              # Script principal d'optimisation
+├── plan_raccordement_OO.py              # Script principal d'optimisation
 ├── batiments.csv                     # Données des bâtiments
 ├── infra.csv                         # Données des infrastructures
 ├── reseau_en_arbre.csv               # Données du réseau électrique
-├── plan_raccordement_dommages.csv    # Résultat: plan détaillé par infrastructure
-├── synthese_phases_dommages.csv      # Résultat: synthèse des phases
+├── plan_raccordement_dommages_oo.csv    # Résultat: plan détaillé par infrastructure
+├── synthese_phases_dommages_oo.csv      # Résultat: synthèse des phases
 └── docs/                             # Documentation supplémentaire
     ├── Rapport Optimisation Opérationnelle.pdf
     └── carte 23.pdf                  # Carte du réseau électrique
