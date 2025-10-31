@@ -48,6 +48,10 @@ L'objectif est de construire un **arbre couvrant minimal** (Minimum Spanning Tre
    - Les coûts des infrastructures (aérien, semi-aérien, fourreau) et les durées de travail sont calculés pour chaque connexion.
 
 2. **Priorisation des Connexions** :
+   - La métrique principale de priorisation utilisée est le ratio **bénéficiaires/coût** (nombre de maisons desservies par euro investi).
+   - Les infrastructures sont classées par ordre décroissant de ce ratio pour maximiser l'impact social par euro dépensé.
+   - Pour chaque phase, les infrastructures sont sélectionnées selon ce classement jusqu'à atteindre le budget alloué à la phase.
+   - En cas d'égalité du ratio, le nombre absolu de bénéficiaires est utilisé comme critère secondaire.
    - Les connexions sont priorisées en fonction de leur **coût par prise raccordée**. Cette métrique est calculée comme suit :
      \[
      \text{Métrique de Priorisation} = \frac{\text{Coût Total de la Connexion}}{\text{Nombre de Prises Raccordées}}
