@@ -39,7 +39,7 @@ projet_optimisation/
 Le projet utilise les fichiers suivants :
 1. **`batiments.csv`** : Contient les informations sur les bâtiments (coordonnées, nombre d'habitants, etc.).
 2. **`infra.csv`** : Contient les informations sur les infrastructures existantes ou à construire.
-3. **`reseau_en_arbre.csv`** : Décrit les connexions possibles entre les bâtiments et le réseau électrique, ainsi que les coûts associés.
+3. **`reseau_en_arbre.csv`** : Décrit les connexions possibles entre les bâtiments et le réseau électrique, ainsi que les coûts associés. /!\ ce fichier a été corrigé en amout dans un autre notebook 
 
 ## Contraintes
 - **Coûts du matériel** :
