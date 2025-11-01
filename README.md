@@ -27,7 +27,7 @@ projet_optimisation/
 ```
 ├── batiments.csv                     # Données des bâtiments
 ├── infra.csv                         # Données des infrastructures
-├── reseau_en_arbre.csv               # Données du réseau électrique
+├── reseau_en_arbre.csv               # Données du réseau électrique ( /!\ Une precision, ce fichier a été corrigé dans un autre fichier nootebook qui ne se trouve pas dans ce projet)
 ├── plan_raccordement_dommages_oo.csv # Résultat: plan détaillé par infrastructure
 └── synthese_phases_dommages_oo.csv   # Résultat: synthèse des phases
 ```
