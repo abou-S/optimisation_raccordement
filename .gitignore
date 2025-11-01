@@ -1,0 +1,19 @@
+# Ignorer les fichiers CSV et Excel
+*.csv
+*.xlsx
+*.xls
+
+# Ignorer l'environnement virtuel
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignorer les fichiers de configuration IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignorer les fichiers de logs
+*.log
